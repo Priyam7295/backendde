@@ -1,0 +1,9 @@
+flask
+pandas
+flask_cors
+supabase
+cryptography
+google-generativeai
+openai
+
+python-dotenv
