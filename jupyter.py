@@ -194,7 +194,7 @@ def upload_file():
 
         # t= np.array()
 
-        to_return["C3data"]=c3_data
+        # to_return["C3data"]=c3_data
 
         # calling the function to save the records in my table
         saving_records_in_sql_db(email ,auth_id ,result_of_C3 ,result_of_C4 ,operation)
