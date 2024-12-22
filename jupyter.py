@@ -13,21 +13,13 @@ load_dotenv()
 api_key:str=os.environ.get("NEXT_PUBLIC_GOOGLE_API_KEY")  
 
 
-print("api key yyy y yy ",api_key)
-
 import google.generativeai as genai
 
-# Configure API key
-genai.configure(api_key=api_key)  # Use your actual API key here
-
-# Create a GenerativeModel instance with the model name
+genai.configure(api_key=api_key) 
 model = genai.GenerativeModel("gemini-1.5-flash")
-
-# Generate only Python code to calculate the average of an array
 response = model.generate_content("Write Python code to find the average of an array. Only return the code, no additional text, just code so that I can run it in command line and the name should be Mean_array")
 
-# Print the generated code
-print(response.text.strip())
+
 
 
 
@@ -49,7 +41,7 @@ def check_data_type_google_genAI(nums):
     # print(cleaned_code)
     exec(cleaned_code, globals())
 
-    # Dynamically call the generated function
+    # Dynamically calling the generated function
     function_name = "validate_array"
     if function_name in globals():
         result = globals()[function_name](nums)  # Pass nums to the dynamically defined function
@@ -98,7 +90,6 @@ from dotenv import load_dotenv
 load_dotenv()
 key = os.environ.get("NEXT_PUBLIC_SUPABASE_KEY")  
 url= os.environ.get("NEXT_PUBLIC_SUPABASE_URL") 
-# key ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ1cGpsa2h2emFuZHVicHVnb2F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ3ODQzMTksImV4cCI6MjA1MDM2MDMxOX0.5B7hbvTOF6gm9nYmIZJdD_iigRWtxy2PZEv76eg-fLQ"
 
 print(url)
 print("key",key)
@@ -115,6 +106,17 @@ def saving_records_in_sql_db(email ,authId,C3 ,C4 ,operation):
         "operation": operation
     }).execute()
 
+
+
+
+
+
+
+
+
+
+
+# flask code ------------------------------------
 
 from flask import Flask, request, jsonify
 import pandas as pd
@@ -173,7 +175,7 @@ def upload_file():
         is_C4_valid = check_data_type_google_genAI(c4_data)
         
         result_of_C3 =-1
-        result_of_C3=-1
+        result_of_C4=-1
         nan_count_c3=0
         nan_count_c4=0
         if is_C3_valid!=-1:
@@ -199,6 +201,7 @@ def upload_file():
 
         return jsonify(to_return)
 
+    return jsonify({"error": "Invalid file type"}), 400
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
